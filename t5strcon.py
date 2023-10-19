@@ -1,6 +1,7 @@
-﻿import re
+import re
 import sys
 import fileinput
+import os
 
 # the input is the message.txt in the same folder of the py
 # Read the content of the "message.txt" file
@@ -9,6 +10,8 @@ import fileinput
 
 # get the file drag and drop to the py
 file_dump = sys.argv[1]
+
+file_name = os.path.splitext(os.path.basename(file_dump))[0]
 
 with open(file_dump, "r") as file_dump:
     input_string = file_dump.read()
@@ -39,7 +42,11 @@ for match in matches:
     output_strings.append(output_string)
     start_index = end
 
+output_file_name = f"{file_name}.str"
+
+print(f"Writing to {output_file_name}...")
+
 # Write the output strings to "output.txt" file
-with open("output.txt", "w") as output_file:
+with open(output_file_name, "w") as output_file:
     for output_string in output_strings:
         output_file.write(output_string)
